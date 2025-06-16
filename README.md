@@ -9,7 +9,9 @@ aws_session_token=xxxxxx
 
 **2 - save rules**
 
-python save_sg_rules.py --source-sg-id:sg-xxxxxx   --source-vpc-id:vpc-xxxxx --aws-region:us-east-x
+<pre> ```bash python save_sg_rules.py --source-sg-id:sg-xxxxx --source-vpc-id:vpc-xxxxx --aws-region:us-east-1 ``` </pre>
+
+<pre> ```bash python save_sg_rules.py --source-sg-id:sg-xxxxxx   --source-vpc-id:vpc-xxxxx --aws-region:us-east-x ``` </pre>
 
 **3 - review/edit rules**
 
