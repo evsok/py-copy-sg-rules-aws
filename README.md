@@ -3,9 +3,9 @@
 
 **1 - create aws.config**
 
-aws_access_key_id=xxxxxx
+<pre>aws_access_key_id=xxxxxx
 aws_secret_access_key=xxxxxx
-aws_session_token=xxxxxx
+aws_session_token=xxxxxx</pre>
 
 **2 - save rules**
 
@@ -13,8 +13,8 @@ aws_session_token=xxxxxx
 
 **3 - review/edit rules**
 
-vi sg_rules.json
+<pre>vi sg_rules.json</pre>
 
 **4 - apply rules**
 
-python apply-sg-rules.py --target-sg-id:sg-xxxx   --target-vpc-id:vpc-xxxx --aws-region:us-east-x
+<pre>python apply-sg-rules.py --target-sg-id:sg-xxxx   --target-vpc-id:vpc-xxxx --aws-region:us-east-x</pre>
