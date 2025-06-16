@@ -1,4 +1,5 @@
 import boto3
+import botocore.exceptions
 import json
 import sys
 
@@ -105,15 +106,27 @@ for rule in data['Rules']:
 
 # --- Apply rules ---
 if ingress_rules:
-    ec2.authorize_security_group_ingress(
-        GroupId=target_sg_id,
-        IpPermissions=ingress_rules
-    )
-    print("✅ Ingress rules applied.")
+    try:
+        ec2.authorize_security_group_ingress(
+            GroupId=target_sg_id,
+            IpPermissions=ingress_rules
+        )
+        print("✅ Ingress rules applied.")
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'InvalidPermission.Duplicate':
+            print("⚠️ Some ingress rules were already present. Skipped duplicates.")
+        else:
+            raise
 
 if egress_rules:
-    ec2.authorize_security_group_egress(
-        GroupId=target_sg_id,
-        IpPermissions=egress_rules
-    )
-    print("✅ Egress rules applied.")
+    try:
+        ec2.authorize_security_group_egress(
+            GroupId=target_sg_id,
+            IpPermissions=egress_rules
+        )
+        print("✅ Egress rules applied.")
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == 'InvalidPermission.Duplicate':
+            print("⚠️ Some egress rules were already present. Skipped duplicates.")
+        else:
+            raise
